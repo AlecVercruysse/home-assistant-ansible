@@ -5,24 +5,36 @@
 # Licensed under Apache 2.0. All rights reserved.
 #
 ---
-- name: install required python modules (pre-install)
-  pip:
-    name: "{{ item }}"
-    extra_args: "--upgrade"
-    executable: pip3
-  with_items:
-    - colorlog
+#- name: install required python modules (pre-install)
+#  pip:
+#    name: "{{ item }}"
+#    extra_args: "--upgrade"
+#    executable: pip3
+#  with_items:
+#    - colorlog
+#    - webrtcvad
+#    - aiohttp_cors
+#    - aiodiscover
+#    - janus
+#    - Pillow
+#    - psutil_home_assistant
+#    - scapy
+#     - serial
 
 - name: install defined version of Home Assistant
   pip:
     name: homeassistant
     version: "{{ ha_version }}"
-    executable: pip3
+    # executable: pip3
+    virtualenv: /opt/venv_ha
+    virtualenv_python: python3
   when: ha_version is defined
 
 - name: install latest version of Home Assistant
   pip:
     name: homeassistant
     extra_args: "--upgrade"
-    executable: pip3
+    # executable: pip3
+    virtualenv: /opt/venv_ha
+    virtualenv_python: python3
   when: ha_version is undefined

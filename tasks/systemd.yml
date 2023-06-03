@@ -5,10 +5,11 @@
 # Licensed under Apache 2.0. All rights reserved.
 #
 ---
-- shell: which hass
+- shell: which /opt/venv_ha/bin/hass
   register: hass_command
+  # TODO refactor clearly this is no longer needed
 
-- name: install fedora systemd unit file
+- name: install systemd unit file
   template:
     src: home-assistant.service.j2
     dest: "/etc/systemd/system/home-assistant.service"
